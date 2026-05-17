@@ -1,3 +1,10 @@
+const http = require('http')
+
+http.createServer(function(req, res) {
+res.write('online')
+res.end()
+}).listen(process.env.PORT || 3000)
+
 const mineflayer = require('mineflayer')
 
 const SERVER_HOST = 'celestiansmp.us'
