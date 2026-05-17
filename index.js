@@ -10,7 +10,9 @@ const PASSWORD = 'reiko14'
 const TPA_TARGET = 'zDrowzy'
 
 function sleep(ms) {
-return new Promise(resolve => setTimeout(resolve, ms))
+return new Promise(function(resolve) {
+setTimeout(resolve, ms)
+})
 }
 
 function createBot(index) {
@@ -24,7 +26,7 @@ username: username,
 version: false
 })
 
-bot.once('spawn', async () => {
+bot.once('spawn', async function() {
 console.log('[' + username + '] Entró al servidor')
 
 ```
@@ -56,9 +58,9 @@ try {
     return
   }
 
-  const boneSlot = bot.currentWindow.slots.findIndex(item =>
-    item && item.name.includes('bone')
-  )
+  const boneSlot = bot.currentWindow.slots.findIndex(function(item) {
+    return item && item.name.includes('bone')
+  })
 
   if (boneSlot !== -1) {
     await bot.clickWindow(boneSlot, 0, 0)
@@ -67,9 +69,9 @@ try {
 
   await sleep(1500)
 
-  const chestSlot = bot.currentWindow.slots.findIndex(item =>
-    item && item.name.includes('chest')
-  )
+  const chestSlot = bot.currentWindow.slots.findIndex(function(item) {
+    return item && item.name.includes('chest')
+  })
 
   if (chestSlot !== -1) {
     await bot.clickWindow(chestSlot, 0, 0)
@@ -78,7 +80,7 @@ try {
 
   await sleep(1500)
 
-  const crystalSlot = bot.currentWindow.slots.findIndex(item => {
+  const crystalSlot = bot.currentWindow.slots.findIndex(function(item) {
     if (!item) return false
 
     const name = item.name.toLowerCase()
@@ -103,9 +105,9 @@ try {
 
   await sleep(1500)
 
-  const paperSlot = bot.currentWindow.slots.findIndex(item =>
-    item && item.name.includes('paper')
-  )
+  const paperSlot = bot.currentWindow.slots.findIndex(function(item) {
+    return item && item.name.includes('paper')
+  })
 
   if (paperSlot !== -1) {
     await bot.clickWindow(paperSlot, 0, 0)
@@ -114,7 +116,7 @@ try {
 
   console.log('[' + username + '] Esperando refill...')
 
-  bot.on('messagestr', async (message) => {
+  bot.on('messagestr', async function(message) {
     const msg = message.toLowerCase()
 
     if (
@@ -123,9 +125,9 @@ try {
     ) {
       console.log('[' + username + '] Refill detectado')
 
-      const bones = bot.inventory.items().filter(item =>
-        item.name.includes('bone')
-      )
+      const bones = bot.inventory.items().filter(function(item) {
+        return item.name.includes('bone')
+      })
 
       if (bones.length === 0) {
         console.log('[' + username + '] No tiene huesos')
@@ -159,7 +161,7 @@ try {
 
 })
 
-bot.on('kicked', reason => {
+bot.on('kicked', function(reason) {
 console.log('[' + username + '] Kickeado')
 console.log(reason)
 
@@ -167,7 +169,7 @@ console.log(reason)
 if (!reconnecting) {
   reconnecting = true
 
-  setTimeout(() => {
+  setTimeout(function() {
     console.log('[' + username + '] Reconectando...')
     createBot(index)
   }, 10000)
@@ -176,14 +178,14 @@ if (!reconnecting) {
 
 })
 
-bot.on('end', () => {
+bot.on('end', function() {
 console.log('[' + username + '] Desconectado')
 
 ```
 if (!reconnecting) {
   reconnecting = true
 
-  setTimeout(() => {
+  setTimeout(function() {
     console.log('[' + username + '] Reconectando...')
     createBot(index)
   }, 10000)
@@ -192,12 +194,12 @@ if (!reconnecting) {
 
 })
 
-bot.on('error', err => {
+bot.on('error', function(err) {
 console.log('[' + username + '] Error')
 console.log(err.message)
 })
 
-bot.on('message', msg => {
+bot.on('message', function(msg) {
 console.log('[' + username + '] ' + msg.toAnsi())
 })
 }
