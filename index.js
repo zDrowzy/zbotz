@@ -16,46 +16,46 @@ return new Promise(resolve => setTimeout(resolve, ms))
 }
 
 function createBot(index) {
-const username = `${BASE_NICK}${index}`
+const username = BASE_NICK + index
 
 let reconnecting = false
 
 const bot = mineflayer.createBot({
 host: SERVER_HOST,
 port: SERVER_PORT,
-username,
+username: username,
 version: false
 })
 
 bot.once('spawn', async () => {
-console.log(`[${username}] Entró al servidor`)
+console.log('[' + username + '] Entró al servidor')
 
 ```
 try {
   await sleep(3000)
 
-  bot.chat(`/register ${PASSWORD} ${PASSWORD}`)
-  console.log(`[${username}] Register enviado`)
+  bot.chat('/register ' + PASSWORD + ' ' + PASSWORD)
+  console.log('[' + username + '] Register enviado')
 
   await sleep(2000)
 
-  bot.chat(`/login ${PASSWORD}`)
-  console.log(`[${username}] Login enviado`)
+  bot.chat('/login ' + PASSWORD)
+  console.log('[' + username + '] Login enviado')
 
   await sleep(2000)
 
-  bot.chat(`/tpa ${TPA_TARGET}`)
-  console.log(`[${username}] TPA enviado`)
+  bot.chat('/tpa ' + TPA_TARGET)
+  console.log('[' + username + '] TPA enviado')
 
   await sleep(5000)
 
   bot.chat('/shop Mobs')
-  console.log(`[${username}] Shop abierto`)
+  console.log('[' + username + '] Shop abierto')
 
   await sleep(4000)
 
   if (!bot.currentWindow) {
-    console.log(`[${username}] No se abrió la GUI`)
+    console.log('[' + username + '] No se abrió la GUI')
     return
   }
 
@@ -66,7 +66,7 @@ try {
 
   if (boneSlot !== -1) {
     await bot.clickWindow(boneSlot, 0, 0)
-    console.log(`[${username}] Click hueso`)
+    console.log('[' + username + '] Click hueso')
   }
 
   await sleep(1500)
@@ -78,7 +78,7 @@ try {
 
   if (chestSlot !== -1) {
     await bot.clickWindow(chestSlot, 0, 0)
-    console.log(`[${username}] Click cofre`)
+    console.log('[' + username + '] Click cofre')
   }
 
   await sleep(1500)
@@ -104,7 +104,7 @@ try {
     await sleep(400)
     await bot.clickWindow(crystalSlot, 0, 0)
 
-    console.log(`[${username}] Doble click crystal`)
+    console.log('[' + username + '] Doble click crystal')
   }
 
   await sleep(1500)
@@ -116,10 +116,10 @@ try {
 
   if (paperSlot !== -1) {
     await bot.clickWindow(paperSlot, 0, 0)
-    console.log(`[${username}] Click papel`)
+    console.log('[' + username + '] Click papel')
   }
 
-  console.log(`[${username}] Esperando mensaje refill...`)
+  console.log('[' + username + '] Esperando refill...')
 
   bot.on('messagestr', async (message) => {
     const msg = message.toLowerCase()
@@ -128,14 +128,14 @@ try {
       msg.includes(TPA_TARGET.toLowerCase()) &&
       msg.includes('refill')
     ) {
-      console.log(`[${username}] Refill detectado`)
+      console.log('[' + username + '] Refill detectado')
 
       const bones = bot.inventory.items().filter(item =>
         item.name.includes('bone')
       )
 
       if (bones.length === 0) {
-        console.log(`[${username}] No tiene huesos`)
+        console.log('[' + username + '] No tiene huesos')
         return
       }
 
@@ -144,7 +144,7 @@ try {
       for (const bone of bones) {
         try {
           await bot.tossStack(bone)
-          console.log(`[${username}] Tiró ${bone.count} huesos`)
+          console.log('[' + username + '] Tiró ' + bone.count + ' huesos')
         } catch (err) {
           console.log(err.message)
         }
@@ -154,12 +154,12 @@ try {
 
       bot.setControlState('forward', false)
 
-      console.log(`[${username}] Terminó`)
+      console.log('[' + username + '] Terminó')
     }
   })
 
 } catch (err) {
-  console.log(`[${username}] Error general:`)
+  console.log('[' + username + '] Error general')
   console.log(err)
 }
 ```
@@ -167,7 +167,7 @@ try {
 })
 
 bot.on('kicked', reason => {
-console.log(`[${username}] Kickeado`)
+console.log('[' + username + '] Kickeado')
 console.log(reason)
 
 ```
@@ -175,7 +175,7 @@ if (!reconnecting) {
   reconnecting = true
 
   setTimeout(() => {
-    console.log(`[${username}] Reconectando...`)
+    console.log('[' + username + '] Reconectando...')
     createBot(index)
   }, 10000)
 }
@@ -184,14 +184,14 @@ if (!reconnecting) {
 })
 
 bot.on('end', () => {
-console.log(`[${username}] Desconectado`)
+console.log('[' + username + '] Desconectado')
 
 ```
 if (!reconnecting) {
   reconnecting = true
 
   setTimeout(() => {
-    console.log(`[${username}] Reconectando...`)
+    console.log('[' + username + '] Reconectando...')
     createBot(index)
   }, 10000)
 }
@@ -200,12 +200,12 @@ if (!reconnecting) {
 })
 
 bot.on('error', err => {
-console.log(`[${username}] Error:`)
+console.log('[' + username + '] Error')
 console.log(err.message)
 })
 
 bot.on('message', msg => {
-console.log(`[${username}] ${msg.toAnsi()}`)
+console.log('[' + username + '] ' + msg.toAnsi())
 })
 }
 
