@@ -30,7 +30,7 @@ const bot = mineflayer.createBot({
 host: SERVER_HOST,
 port: SERVER_PORT,
 username: username,
-version: false
+version: 1.21
 })
 
 bot.once('spawn', async function() {
