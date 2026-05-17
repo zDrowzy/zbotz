@@ -8,5 +8,6 @@
   "dependencies": {
     "mineflayer": "^4.20.1",
     "vec3": "^0.1.10"
-  }
+  "engines": {
+"node": "20.x"
 }
