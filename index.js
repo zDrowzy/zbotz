@@ -1,11 +1,10 @@
 const http = require('http')
+const mineflayer = require('mineflayer')
 
 http.createServer(function(req, res) {
 res.write('online')
 res.end()
 }).listen(process.env.PORT || 3000)
-
-const mineflayer = require('mineflayer')
 
 const SERVER_HOST = 'celestiansmp.us'
 const SERVER_PORT = 25565
@@ -30,35 +29,36 @@ const bot = mineflayer.createBot({
 host: SERVER_HOST,
 port: SERVER_PORT,
 username: username,
-version: 1.21
+version: false,
+auth: 'offline'
 })
 
 bot.once('spawn', async function() {
 console.log('[' + username + '] Entró al servidor')
 
-
+```
 try {
-  await sleep(3000)
+  await sleep(7000)
 
   bot.chat('/register ' + PASSWORD + ' ' + PASSWORD)
   console.log('[' + username + '] Register enviado')
 
-  await sleep(2000)
+  await sleep(7000)
 
   bot.chat('/login ' + PASSWORD)
   console.log('[' + username + '] Login enviado')
 
-  await sleep(2000)
+  await sleep(7000)
 
   bot.chat('/tpa ' + TPA_TARGET)
   console.log('[' + username + '] TPA enviado')
 
-  await sleep(5000)
+  await sleep(7000)
 
   bot.chat('/shop Mobs')
   console.log('[' + username + '] Shop abierto')
 
-  await sleep(4000)
+  await sleep(6000)
 
   if (!bot.currentWindow) {
     console.log('[' + username + '] No se abrió la GUI')
@@ -74,7 +74,7 @@ try {
     console.log('[' + username + '] Click hueso')
   }
 
-  await sleep(1500)
+  await sleep(2000)
 
   const chestSlot = bot.currentWindow.slots.findIndex(function(item) {
     return item && item.name.includes('chest')
@@ -85,7 +85,7 @@ try {
     console.log('[' + username + '] Click cofre')
   }
 
-  await sleep(1500)
+  await sleep(2000)
 
   const crystalSlot = bot.currentWindow.slots.findIndex(function(item) {
     if (!item) return false
@@ -104,13 +104,13 @@ try {
 
   if (crystalSlot !== -1) {
     await bot.clickWindow(crystalSlot, 0, 0)
-    await sleep(400)
+    await sleep(500)
     await bot.clickWindow(crystalSlot, 0, 0)
 
     console.log('[' + username + '] Doble click crystal')
   }
 
-  await sleep(1500)
+  await sleep(2000)
 
   const paperSlot = bot.currentWindow.slots.findIndex(function(item) {
     return item && item.name.includes('paper')
@@ -164,14 +164,19 @@ try {
   console.log('[' + username + '] Error general')
   console.log(err)
 }
-
+```
 
 })
 
 bot.on('kicked', function(reason) {
 console.log('[' + username + '] Kickeado')
-console.log(reason)
 
+```
+try {
+  console.log(JSON.stringify(reason, null, 2))
+} catch (e) {
+  console.log(reason)
+}
 
 if (!reconnecting) {
   reconnecting = true
@@ -179,25 +184,25 @@ if (!reconnecting) {
   setTimeout(function() {
     console.log('[' + username + '] Reconectando...')
     createBot(index)
-  }, 10000)
+  }, 15000)
 }
-
+```
 
 })
 
 bot.on('end', function() {
 console.log('[' + username + '] Desconectado')
 
-
+```
 if (!reconnecting) {
   reconnecting = true
 
   setTimeout(function() {
     console.log('[' + username + '] Reconectando...')
     createBot(index)
-  }, 10000)
+  }, 15000)
 }
-
+```
 
 })
 
