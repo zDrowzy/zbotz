@@ -1,1 +1,12 @@
-
+{
+  "name": "mineflayer-bots",
+  "version": "1.0.0",
+  "main": "zbot.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "mineflayer": "^4.20.1",
+    "vec3": "^0.1.10"
+  }
+}
