@@ -29,7 +29,7 @@ version: false
 bot.once('spawn', async function() {
 console.log('[' + username + '] Entró al servidor')
 
-```
+
 try {
   await sleep(3000)
 
@@ -157,7 +157,7 @@ try {
   console.log('[' + username + '] Error general')
   console.log(err)
 }
-```
+
 
 })
 
@@ -165,7 +165,7 @@ bot.on('kicked', function(reason) {
 console.log('[' + username + '] Kickeado')
 console.log(reason)
 
-```
+
 if (!reconnecting) {
   reconnecting = true
 
@@ -174,14 +174,14 @@ if (!reconnecting) {
     createBot(index)
   }, 10000)
 }
-```
+
 
 })
 
 bot.on('end', function() {
 console.log('[' + username + '] Desconectado')
 
-```
+
 if (!reconnecting) {
   reconnecting = true
 
@@ -190,7 +190,7 @@ if (!reconnecting) {
     createBot(index)
   }, 10000)
 }
-```
+
 
 })
 
