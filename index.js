@@ -1,11 +1,9 @@
-// index.js
-
 const mineflayer = require('mineflayer')
 
 const SERVER_HOST = 'celestiansmp.us'
 const SERVER_PORT = 25565
 
-const BASE_NICK = 'test'
+const BASE_NICK = 'zDrowzyAFK'
 const BOT_COUNT = 2
 
 const PASSWORD = 'reiko14'
@@ -17,7 +15,6 @@ return new Promise(resolve => setTimeout(resolve, ms))
 
 function createBot(index) {
 const username = BASE_NICK + index
-
 let reconnecting = false
 
 const bot = mineflayer.createBot({
@@ -59,8 +56,7 @@ try {
     return
   }
 
-  // Click hueso
-  let boneSlot = bot.currentWindow.slots.findIndex(item =>
+  const boneSlot = bot.currentWindow.slots.findIndex(item =>
     item && item.name.includes('bone')
   )
 
@@ -71,8 +67,7 @@ try {
 
   await sleep(1500)
 
-  // Click cofre
-  let chestSlot = bot.currentWindow.slots.findIndex(item =>
+  const chestSlot = bot.currentWindow.slots.findIndex(item =>
     item && item.name.includes('chest')
   )
 
@@ -83,8 +78,7 @@ try {
 
   await sleep(1500)
 
-  // Click crystal x32
-  let crystalSlot = bot.currentWindow.slots.findIndex(item => {
+  const crystalSlot = bot.currentWindow.slots.findIndex(item => {
     if (!item) return false
 
     const name = item.name.toLowerCase()
@@ -109,8 +103,7 @@ try {
 
   await sleep(1500)
 
-  // Click papel
-  let paperSlot = bot.currentWindow.slots.findIndex(item =>
+  const paperSlot = bot.currentWindow.slots.findIndex(item =>
     item && item.name.includes('paper')
   )
 
