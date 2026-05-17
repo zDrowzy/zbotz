@@ -36,7 +36,7 @@ auth: 'offline'
 bot.once('spawn', async function() {
 console.log('[' + username + '] Entró al servidor')
 
-```
+
 try {
   await sleep(7000)
 
@@ -164,14 +164,14 @@ try {
   console.log('[' + username + '] Error general')
   console.log(err)
 }
-```
+
 
 })
 
 bot.on('kicked', function(reason) {
 console.log('[' + username + '] Kickeado')
 
-```
+
 try {
   console.log(JSON.stringify(reason, null, 2))
 } catch (e) {
@@ -186,14 +186,14 @@ if (!reconnecting) {
     createBot(index)
   }, 15000)
 }
-```
+
 
 })
 
 bot.on('end', function() {
 console.log('[' + username + '] Desconectado')
 
-```
+
 if (!reconnecting) {
   reconnecting = true
 
@@ -202,7 +202,7 @@ if (!reconnecting) {
     createBot(index)
   }, 15000)
 }
-```
+
 
 })
 
