@@ -4,7 +4,7 @@ const { Vec3 } = require('vec3')
 const SERVER_HOST = 'celestiansmp.us'
 const SERVER_PORT = 25565
 
-const BASE_NICK = 'test' // test1, test2, etc
+const BASE_NICK = 'zDrowzyAFK' // test1, test2, etc
 const BOT_COUNT = 2
 
 const PASSWORD = 'reiko14'
